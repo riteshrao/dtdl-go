@@ -37,7 +37,7 @@ func (i *Interface) GetCapability(id string) CapabilityType {
 	return nil
 }
 
-// Parses an interface type.
+// ParseInterface an interface type.
 func ParseInterface(i map[string]interface{}, t entityTracker) *Interface {
 	res := &Interface{
 		Entity: parseEntity(i),
