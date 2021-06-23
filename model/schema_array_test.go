@@ -11,7 +11,7 @@ func TestParseArraySchema_Primitive(t *testing.T) {
 	a := assert.New(t)
 	m := &mockTracker{}
 
-	m.On("add", mock.MatchedBy(func (e EntityType) bool {
+	m.On("Add", mock.MatchedBy(func (e EntityType) bool {
 		return e.ID() == "dtmi:test:array;1"
 	}))
 
@@ -44,11 +44,11 @@ func TestParseArraySchema_Reference(t *testing.T) {
 		},
 	}
 
-	m.On("add", mock.MatchedBy(func(e EntityType) bool {
+	m.On("Add", mock.MatchedBy(func(e EntityType) bool {
 		return e.ID() == "dtmi:test:array;1"
 	}))
 
-	m.On("get", "dtmi:schema:ref;1").Return(r, true)
+	m.On("Get", "dtmi:schema:ref;1").Return(r, true)
 
 	s := parseArraySchema(map[string]interface{}{
 		"@id":           "dtmi:test:array;1",
@@ -63,14 +63,14 @@ func TestParseArraySchema_Reference(t *testing.T) {
 	a.Same(r, s.ElementSchema())
 	a.Equal(r.ID(), s.ElementSchema().ID())
 	a.ElementsMatch(r.Types(), s.ElementSchema().Types())
-	m.AssertNumberOfCalls(t, "get", 1)
+	m.AssertNumberOfCalls(t, "Get", 1)
 }
 
 func TestParseArraySchema_Enum(t *testing.T) {
 	a := assert.New(t)
 	m := &mockTracker{}
 
-	m.On("add", mock.MatchedBy(func(e EntityType) bool {
+	m.On("Add", mock.MatchedBy(func(e EntityType) bool {
 		return e.ID() == "dtmi:test:enum;1" || e.ID() == "dtmi:test:array;1"
 	}))
 
@@ -92,7 +92,7 @@ func TestParseArraySchema_Map(t *testing.T) {
 	a := assert.New(t)
 	m := &mockTracker{}
 
-	m.On("add", mock.MatchedBy(func(e EntityType) bool {
+	m.On("Add", mock.MatchedBy(func(e EntityType) bool {
 		return e.ID() == "dtmi:test:map;1" || e.ID() == "dtmi:test:array;1"
 	}))
 
@@ -114,7 +114,7 @@ func TestParseArraySchema_Object(t *testing.T) {
 	a := assert.New(t)
 	m := &mockTracker{}
 
-	m.On("add", mock.MatchedBy(func(e EntityType) bool {
+	m.On("Add", mock.MatchedBy(func(e EntityType) bool {
 		return e.ID() == "dtmi:test:obj;1" || e.ID() == "dtmi:test:array;1"
 	}))
 

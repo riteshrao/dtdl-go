@@ -10,7 +10,7 @@ import (
 func TestParseEnumSchema(t *testing.T) {
 	a := assert.New(t)
 	m := &mockTracker{}
-	m.On("add", mock.MatchedBy(func(e EntityType) bool {
+	m.On("Add", mock.MatchedBy(func(e EntityType) bool {
 		return e.ID() == "dtmi:contoso:enum;1"
 	}))
 

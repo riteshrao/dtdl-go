@@ -11,7 +11,7 @@ func TestParseProperty_Primitive(t *testing.T) {
 	a := assert.New(t)
 	m := &mockTracker{}
 
-	m.On("add", mock.MatchedBy(func (e EntityType) bool {
+	m.On("Add", mock.MatchedBy(func (e EntityType) bool {
 		return e.ID() == "dtmi:property;1"
 	}))
 
@@ -47,11 +47,11 @@ func TestParseProperty_SchemaReference(t *testing.T) {
 		},
 	}
 
-	m.On("add", mock.MatchedBy(func (e EntityType) bool {
+	m.On("Add", mock.MatchedBy(func (e EntityType) bool {
 		return e.ID() == "dtmi:property;1"
 	}))
 
-	m.On("get", "dtmi:schema:ref;1").Return(r, true)
+	m.On("Get", "dtmi:schema:ref;1").Return(r, true)
 	c := parseProperty(map[string]interface{} {
 		"@id": "dtmi:property;1",
 		"@type": "Property",
@@ -61,7 +61,7 @@ func TestParseProperty_SchemaReference(t *testing.T) {
 
 	a.IsType(&SchemaReference{}, c.schema)
 	a.Same(r, c.Schema())
-	m.AssertNumberOfCalls(t, "get", 1)
+	m.AssertNumberOfCalls(t, "Get", 1)
 	m.AssertExpectations(t)
 }
 
@@ -69,11 +69,11 @@ func TestParseProperty_SchemaReference_Unsupported_WhenNotFound(t *testing.T) {
 	a := assert.New(t)
 	m := &mockTracker{}
 	
-	m.On("add", mock.MatchedBy(func (e EntityType) bool {
+	m.On("Add", mock.MatchedBy(func (e EntityType) bool {
 		return e.ID() == "dtmi:property;1"
 	}))
 
-	m.On("get", "dtmi:schema:ref;1").Return(&Entity{}, true)
+	m.On("Get", "dtmi:schema:ref;1").Return(&Entity{}, true)
 	c := parseProperty(map[string]interface{} {
 		"@id": "dtmi:property;1",
 		"@type": "Property",
@@ -83,6 +83,6 @@ func TestParseProperty_SchemaReference_Unsupported_WhenNotFound(t *testing.T) {
 
 	a.IsType(&SchemaReference{}, c.schema)
 	a.Same(UnsupportedSchema, c.Schema())
-	m.AssertNumberOfCalls(t, "get", 1)
+	m.AssertNumberOfCalls(t, "Get", 1)
 	m.AssertExpectations(t)
 }

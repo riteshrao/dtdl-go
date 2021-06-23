@@ -10,7 +10,7 @@ func TestID_ReturnUnsupported_WhenNotFound(t *testing.T) {
 	a := assert.New(t)
 	m := &mockTracker{}
 
-	m.On("get","dtmi:contoso:schema;1").Return(&Entity{}, false)
+	m.On("Get","dtmi:contoso:schema;1").Return(&Entity{}, false)
 	s := SchemaReference{
 		id: "dtmi:contoso:schema;1",
 		tracker: m,
@@ -24,7 +24,7 @@ func TestID_ReturnUnsupported_WhenNotSchema(t *testing.T) {
 	a := assert.New(t)
 	m := &mockTracker{}
 
-	m.On("get","dtmi:contoso:schema;1").Return(&Entity{}, true)
+	m.On("Get","dtmi:contoso:schema;1").Return(&Entity{}, true)
 	s := SchemaReference{
 		id: "dtmi:contoso:schema;1",
 		tracker: m,
@@ -43,7 +43,7 @@ func TestID_ReturnReferencedID(t *testing.T) {
 		},
 	}
 
-	m.On("get", "dtmi:contoso:schema;1").Return(r, true)
+	m.On("Get", "dtmi:contoso:schema;1").Return(r, true)
 	
 	s := SchemaReference{
 		id: "dtmi:contoso:schema;1",
@@ -58,7 +58,7 @@ func TestTypes_ReturnUnsupported_WhenNotFound(t *testing.T) {
 	a := assert.New(t)
 	m := &mockTracker{}
 
-	m.On("get","dtmi:contoso:schema;1").Return(&Entity{}, false)
+	m.On("Get","dtmi:contoso:schema;1").Return(&Entity{}, false)
 	s := SchemaReference{
 		id: "dtmi:contoso:schema;1",
 		tracker: m,
@@ -72,7 +72,7 @@ func TestTypes_ReturnUnsupported_WhenNotSchema(t *testing.T) {
 	a := assert.New(t)
 	m := &mockTracker{}
 
-	m.On("get","dtmi:contoso:schema;1").Return(&Entity{}, true)
+	m.On("Get","dtmi:contoso:schema;1").Return(&Entity{}, true)
 	s := SchemaReference{
 		id: "dtmi:contoso:schema;1",
 		tracker: m,
@@ -91,7 +91,7 @@ func TestTypes_ReturnReferencedTypes(t *testing.T) {
 		},
 	}
 
-	m.On("get", "dtmi:contoso:schema;1").Return(r, true)
+	m.On("Get", "dtmi:contoso:schema;1").Return(r, true)
 	
 	s := SchemaReference{
 		id: "dtmi:contoso:schema;1",
@@ -106,7 +106,7 @@ func TestDisplayName_ReturnUnsupported_WhenNotFound(t *testing.T) {
 	a := assert.New(t)
 	m := &mockTracker{}
 
-	m.On("get","dtmi:contoso:schema;1").Return(&Entity{}, true)
+	m.On("Get","dtmi:contoso:schema;1").Return(&Entity{}, true)
 	s := SchemaReference{
 		id: "dtmi:contoso:schema;1",
 		tracker: m,

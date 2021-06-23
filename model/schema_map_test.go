@@ -11,7 +11,7 @@ func TestParseMapSchema_Primitive(t *testing.T) {
 	a := assert.New(t)
 	m := &mockTracker{}
 
-	m.On("add", mock.MatchedBy(func (e EntityType) bool {
+	m.On("Add", mock.MatchedBy(func (e EntityType) bool {
 		return e.ID() == "dtmi:com:map;1"
 	}))
 
@@ -44,7 +44,7 @@ func TestParseMapSchema_Array(t *testing.T) {
 	a := assert.New(t)
 	m := &mockTracker{}
 
-	m.On("add", mock.MatchedBy(func(e EntityType) bool {
+	m.On("Add", mock.MatchedBy(func(e EntityType) bool {
 		return e.ID() == "dtmi:test:array;1" || e.ID() == "dtmi:com:map;1"
 	}))
 
@@ -81,7 +81,7 @@ func TestParseMapSchema_Map(t *testing.T) {
 	a := assert.New(t)
 	m := &mockTracker{}
 
-	m.On("add", mock.MatchedBy(func(e EntityType) bool {
+	m.On("Add", mock.MatchedBy(func(e EntityType) bool {
 		return e.ID() == "dtmi:test:map;1" || e.ID() == "dtmi:com:map;1"
 	}))
 
@@ -118,7 +118,7 @@ func TestParseMapSchema_Object(t *testing.T) {
 	a := assert.New(t)
 	m := &mockTracker{}
 
-	m.On("add", mock.MatchedBy(func(e EntityType) bool {
+	m.On("Add", mock.MatchedBy(func(e EntityType) bool {
 		return e.ID() == "dtmi:test:obj;1" || e.ID() == "dtmi:com:map;1"
 	}))
 
@@ -160,11 +160,11 @@ func TestParseMapSchema_Reference(t *testing.T) {
 		},
 	}
 
-	m.On("add", mock.MatchedBy(func(e EntityType) bool {
+	m.On("Add", mock.MatchedBy(func(e EntityType) bool {
 		return e.ID() == "dtmi:schema:ref;1" || e.ID() == "dtmi:com:map;1"
 	}))
 
-	m.On("get", "dtmi:schema:ref;1").Return(r, true)
+	m.On("Get", "dtmi:schema:ref;1").Return(r, true)
 
 	s := parseMapSchema(map[string]interface{}{
 		"@id":   "dtmi:com:map;1",
@@ -177,5 +177,5 @@ func TestParseMapSchema_Reference(t *testing.T) {
 	a.IsType(&SchemaReference{}, s.MapValue().schema)
 	a.Same(r, s.MapValue().Schema())
 	a.Equal(r.ID(), s.MapValue().Schema().ID())
-	m.AssertNumberOfCalls(t, "get", 1)
+	m.AssertNumberOfCalls(t, "Get", 1)
 }

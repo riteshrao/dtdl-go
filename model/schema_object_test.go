@@ -11,7 +11,7 @@ import (
 func TestParseObjectSchema_Primitive(t *testing.T) {
 	a := assert.New(t)
 	m := &mockTracker{}
-	m.On("add", mock.MatchedBy(func(e EntityType) bool {
+	m.On("Add", mock.MatchedBy(func(e EntityType) bool {
 		return e.ID() == "dtmi:com:object;1"
 	}))
 
@@ -66,11 +66,11 @@ func TestParseObjectSchema_Reference(t *testing.T) {
 		},
 	}
 	
-	m.On("add", mock.MatchedBy(func(e EntityType) bool {
+	m.On("Add", mock.MatchedBy(func(e EntityType) bool {
 		return e.ID() == "dtmi:com:object;1" || e.ID() == "dtmi:schema:ref;"
 	}))
 
-	m.On("get", "dtmi:schema:ref;1").Return(r, true)
+	m.On("Get", "dtmi:schema:ref;1").Return(r, true)
 
 	o := parseObjectSchema(map[string]interface{}{
 		"@id":         "dtmi:com:object;1",
@@ -102,5 +102,5 @@ func TestParseObjectSchema_Reference(t *testing.T) {
 	a.Same(r, o.Fields()[1].Schema())
 	a.Equal(r.ID(), o.Fields()[1].Schema().ID())
 	
-	m.AssertNumberOfCalls(t, "get", 2)
+	m.AssertNumberOfCalls(t, "Get", 2)
 }

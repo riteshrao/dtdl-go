@@ -10,7 +10,7 @@ func TestInterfaceReferenceResolve_WhenNotFound(t *testing.T) {
 	a := assert.New(t)
 	m := &mockTracker{}
 
-	m.On("get", "dtmi:ref;1").Return(&Entity{}, false)
+	m.On("Get", "dtmi:ref;1").Return(&Entity{}, false)
 	ref := InterfaceReference{
 		id: "dtmi:ref;1",
 		tracker: m,
@@ -25,7 +25,7 @@ func TestInterfaceReferenceResolve_WhenNotInterface(t *testing.T) {
 	a := assert.New(t)
 	m := &mockTracker{}
 
-	m.On("get", "dtmi:ref;1").Return(&Entity{}, true)
+	m.On("Get", "dtmi:ref;1").Return(&Entity{}, true)
 	ref := InterfaceReference{
 		id: "dtmi:ref;1",
 		tracker: m,
@@ -41,7 +41,7 @@ func TestInterfaceReferenceResolve_WhenFound(t *testing.T) {
 	m := &mockTracker{}
 	i := &Interface{}
 
-	m.On("get", "dtmi:ref;1").Return(i, true)
+	m.On("Get", "dtmi:ref;1").Return(i, true)
 	ref := InterfaceReference{
 		id: "dtmi:ref;1",
 		tracker: m,

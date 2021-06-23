@@ -12,15 +12,15 @@ func TestParseInterface(t *testing.T) {
 	m := &mockTracker{}
 	ext := &Interface{}
 
-	m.On("add", mock.Anything).Times(6)
-	m.On("get", "dtmi:extends;1").Return(ext, true)
+	m.On("Add", mock.Anything).Times(6)
+	m.On("Get", "dtmi:extends;1").Return(ext, true)
 
 	i := ParseInterface(map[string]interface{}{
 		"@id": "dtmi:interface;1",
 		"@type": "Interface",
 		"displayName": "Interface",
 		"description": "Interface",
-		"extends": []string{"dtmi:extends;1"},
+		"extends": []interface{}{"dtmi:extends;1"},
 		"contents": []interface{}{
 			map[string]interface{}{
 				"@id": "dtmi:command;1",

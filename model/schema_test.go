@@ -32,7 +32,7 @@ func TestParseSchema_Custom(t *testing.T) {
 	
 	for n, st := range cases {
 		m := &mockTracker{}
-		m.On("add", mock.MatchedBy(func(e EntityType) bool {
+		m.On("Add", mock.MatchedBy(func(e EntityType) bool {
 			return e.ID() == "dtmi:schema;1"
 		}))
 

@@ -12,11 +12,11 @@ func TestParseComponent(t *testing.T) {
 	m := &mockTracker{}
 	i := &Interface{}
 
-	m.On("add", mock.MatchedBy(func (e EntityType) bool {
+	m.On("Add", mock.MatchedBy(func (e EntityType) bool {
 		return e.ID() == "dtmi:component;1"
 	}))
 
-	m.On("get", "dtmi:interface;1").Return(i, true)
+	m.On("Get", "dtmi:interface;1").Return(i, true)
 
 	c := parseComponent(map[string]interface{}{
 		"@id": "dtmi:component;1",

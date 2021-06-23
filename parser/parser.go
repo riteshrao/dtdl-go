@@ -30,15 +30,17 @@ func (p *ModelParser) Parse(input []byte) error {
 
 	switch reflect.TypeOf(parsed).Kind() {
 	case reflect.Slice:
-		for _, item := range parsed.([]map[string]interface{}) {
-			if err := p.parseInterface(item); err != nil {
+		for _, item := range parsed.([]interface{}) {
+			if err := p.parseInterface(item.(map[string]interface{})); err != nil {
 				return err
 			}
 		}
+		return nil
 	case reflect.Map:
 		return p.parseInterface(parsed.(map[string]interface{}))
+	default:
+		return fmt.Errorf("Unrecognized content")
 	}
-	return fmt.Errorf("Unrecognized content")
 }
 
 // GetCommand returns a command by its id.

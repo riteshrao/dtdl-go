@@ -37,22 +37,23 @@ func (i *Interface) GetCapability(id string) CapabilityType {
 	return nil
 }
 
+// Parses an interface type.
 func ParseInterface(i map[string]interface{}, t entityTracker) *Interface {
 	res := &Interface{
 		Entity: parseEntity(i),
+		extends: make([]InterfaceReference, 0),
+		contents: make([]CapabilityType, 0),
 	}
 
-	extends := make([]InterfaceReference, 0)
-	if items, ok := i["extends"].([]string); ok {
+	if items, ok := i["extends"].([]interface{}); ok {
 		for _, item := range items {
-			extends = append(extends, InterfaceReference{
-				id: item,
+			res.extends = append(res.extends, InterfaceReference{
+				id: item.(string),
 				tracker: t,
 			})
 		}
 	}
 
-	contents := make([]CapabilityType, 0)
 	if items, ok := i["contents"].([]interface{}); ok {
 		for _, item := range items {
 			if cap, ok := item.(map[string]interface{}); ok {
@@ -60,15 +61,15 @@ func ParseInterface(i map[string]interface{}, t entityTracker) *Interface {
 					if reflect.TypeOf(types).Kind() == reflect.String {
 						switch types.(string) {
 						case "Command":
-							contents = append(contents, parseCommand(cap, t))
+							res.contents = append(res.contents, parseCommand(cap, t))
 						case "Component":
-							contents = append(contents, parseComponent(cap, t))
+							res.contents = append(res.contents, parseComponent(cap, t))
 						case "Property":
-							contents = append(contents, parseProperty(cap, t))
+							res.contents = append(res.contents, parseProperty(cap, t))
 						case "Relationship":
-							contents = append(contents, parseRelationship(cap, t))
+							res.contents = append(res.contents, parseRelationship(cap, t))
 						case "Telemetry":
-							contents = append(contents, parseTelemetry(cap, t))
+							res.contents = append(res.contents, parseTelemetry(cap, t))
 						}
 					}
 
@@ -76,15 +77,15 @@ func ParseInterface(i map[string]interface{}, t entityTracker) *Interface {
 						for _, ct := range types.([]string) {
 							switch ct {
 							case "Command":
-								contents = append(contents, parseCommand(cap, t))
+								res.contents = append(res.contents, parseCommand(cap, t))
 							case "Component":
-								contents = append(contents, parseComponent(cap, t))
+								res.contents = append(res.contents, parseComponent(cap, t))
 							case "Property":
-								contents = append(contents, parseProperty(cap, t))
+								res.contents = append(res.contents, parseProperty(cap, t))
 							case "Relationship":
-								contents = append(contents, parseRelationship(cap, t))
+								res.contents = append(res.contents, parseRelationship(cap, t))
 							case "Telemetry":
-								contents = append(contents, parseTelemetry(cap, t))
+								res.contents = append(res.contents, parseTelemetry(cap, t))
 							}
 						}
 					}
@@ -92,9 +93,6 @@ func ParseInterface(i map[string]interface{}, t entityTracker) *Interface {
 			}
 		}
 	}
-
-	res.extends = extends
-	res.contents = contents
 	
 	t.Add(res)
 	return res
