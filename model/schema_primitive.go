@@ -59,6 +59,7 @@ var (
 			descriptions: map[string]interface{}{"en": "Integer"},
 			types:        []string{"Integer"},
 		},
+		class: IntegerSchemaClass,
 	}
 	// LongSchema definition
 	LongSchema = &Schema{
