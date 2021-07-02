@@ -43,7 +43,7 @@ func TestParseLocaleSpecificDisplayName(t *testing.T) {
 	input := map[string]interface{}{
 		"@id":   "dtmi:com:contoso:test;1",
 		"@type": "Interface",
-		"displayName": map[string]string{
+		"displayName": map[string]interface{}{
 			"en": "Test interface",
 			"fr": "Test interface (fr)",
 		},
@@ -60,7 +60,7 @@ func TestParseLocaleSpecificDescription(t *testing.T) {
 	input := map[string]interface{}{
 		"@id":   "dtmi:com:contoso:test;1",
 		"@type": "Interface",
-		"description": map[string]string{
+		"description": map[string]interface{}{
 			"en": "Test interface",
 			"fr": "Test interface (fr)",
 		},

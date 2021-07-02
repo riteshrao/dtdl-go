@@ -5,8 +5,8 @@ var (
 	BooleanSchema = &Schema{
 		Entity: Entity{
 			id:           "boolean",
-			displayNames: map[string]string{"en": "Boolean"},
-			descriptions: map[string]string{"en": "Boolean"},
+			displayNames: map[string]interface{}{"en": "Boolean"},
+			descriptions: map[string]interface{}{"en": "Boolean"},
 			types:        []string{"Boolean"},
 		},
 		class: BooleanSchemaClass,
@@ -15,8 +15,8 @@ var (
 	DateSchema = &Schema{
 		Entity: Entity{
 			id:           "date",
-			displayNames: map[string]string{"en": "Date"},
-			descriptions: map[string]string{"en": "Date"},
+			displayNames: map[string]interface{}{"en": "Date"},
+			descriptions: map[string]interface{}{"en": "Date"},
 			types:        []string{"Date"},
 		},
 		class: DateSchemaClass,
@@ -25,8 +25,8 @@ var (
 	DateTimeSchema = &Schema{
 		Entity: Entity{
 			id:           "dateTime",
-			displayNames: map[string]string{"en": "DateTime"},
-			descriptions: map[string]string{"en": "DateTime"},
+			displayNames: map[string]interface{}{"en": "DateTime"},
+			descriptions: map[string]interface{}{"en": "DateTime"},
 			types:        []string{"DateTime"},
 		},
 		class: DateTimeSchemaClass,
@@ -35,8 +35,8 @@ var (
 	DoubleSchema = &Schema{
 		Entity: Entity{
 			id:           "double",
-			displayNames: map[string]string{"en": "Double"},
-			descriptions: map[string]string{"en": "Double"},
+			displayNames: map[string]interface{}{"en": "Double"},
+			descriptions: map[string]interface{}{"en": "Double"},
 			types:        []string{"Double"},
 		},
 		class: DoubleSchemaClass,
@@ -45,8 +45,8 @@ var (
 	GeopointSchema = &Schema{
 		Entity: Entity{
 			id:           "geopoint",
-			displayNames: map[string]string{"en": "Geopoint"},
-			descriptions: map[string]string{"en": "Geopoint"},
+			displayNames: map[string]interface{}{"en": "Geopoint"},
+			descriptions: map[string]interface{}{"en": "Geopoint"},
 			types:        []string{"Geopoint"},
 		},
 		class: GeopointSchemaClass,
@@ -55,8 +55,8 @@ var (
 	IntegerSchema = &Schema{
 		Entity: Entity{
 			id:           "integer",
-			displayNames: map[string]string{"en": "Integer"},
-			descriptions: map[string]string{"en": "Integer"},
+			displayNames: map[string]interface{}{"en": "Integer"},
+			descriptions: map[string]interface{}{"en": "Integer"},
 			types:        []string{"Integer"},
 		},
 	}
@@ -64,8 +64,8 @@ var (
 	LongSchema = &Schema{
 		Entity: Entity{
 			id:           "long",
-			displayNames: map[string]string{"en": "Long"},
-			descriptions: map[string]string{"en": "Long"},
+			displayNames: map[string]interface{}{"en": "Long"},
+			descriptions: map[string]interface{}{"en": "Long"},
 			types:        []string{"Boolean"},
 		},
 		class: IntegerSchemaClass,
@@ -74,8 +74,8 @@ var (
 	StringSchema = &Schema{
 		Entity: Entity{
 			id:           "string",
-			displayNames: map[string]string{"en": "String"},
-			descriptions: map[string]string{"en": "String"},
+			displayNames: map[string]interface{}{"en": "String"},
+			descriptions: map[string]interface{}{"en": "String"},
 			types:        []string{"String"},
 		},
 		class: StringSchemaClass,
@@ -84,8 +84,8 @@ var (
 	UnsupportedSchema = &Schema{
 		Entity: Entity{
 			id:           "unsupported",
-			displayNames: map[string]string{"en": "Unsupported"},
-			descriptions: map[string]string{"en": "Unsupported"},
+			displayNames: map[string]interface{}{"en": "Unsupported"},
+			descriptions: map[string]interface{}{"en": "Unsupported"},
 			types:        []string{"Unsupported"},
 		},
 		class: UnsupportedSchemaClass,

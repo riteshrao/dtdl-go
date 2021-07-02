@@ -5,8 +5,8 @@ import "reflect"
 // Entity is the root of all DTDL model entities.
 type Entity struct {
 	id           string
-	displayNames map[string]string
-	descriptions map[string]string
+	displayNames map[string]interface{}
+	descriptions map[string]interface{}
 	comment      string
 	types        []string
 }
@@ -25,7 +25,7 @@ func (e *Entity) Types() []string {
 // DisplayName returns the display name of the entity in the default locale, i.e. en
 func (e *Entity) DisplayName() string {
 	if v, ok := e.displayNames["en"]; ok {
-		return v
+		return v.(string)
 	}
 	return ""
 }
@@ -33,7 +33,7 @@ func (e *Entity) DisplayName() string {
 // Description returns the description of the entity in the default locale. i.e. en
 func (e *Entity) Description() string {
 	if v, ok := e.descriptions["en"]; ok {
-		return v
+		return v.(string)
 	}
 
 	return ""
@@ -48,7 +48,7 @@ func (e *Entity) Comment() string {
 // If a value for the locale is not found, it returns an empty string.
 func (e *Entity) LocaleDescription(locale string) string {
 	if desc, ok := e.descriptions[locale]; ok {
-		return desc
+		return desc.(string)
 	}
 
 	return ""
@@ -58,7 +58,7 @@ func (e *Entity) LocaleDescription(locale string) string {
 // If a value for the locale is not found, it returns an empty string.
 func (e *Entity) LocaleDisplayName(locale string) string {
 	if disp, ok := e.displayNames[locale]; ok {
-		return disp
+		return disp.(string)
 	}
 
 	return ""
@@ -107,27 +107,27 @@ func parseEntity(input map[string]interface{}) Entity {
 	if dispName, ok := input["displayName"]; ok {
 		switch reflect.TypeOf(dispName).Kind() {
 		case reflect.Map:
-			e.displayNames = dispName.(map[string]string)
+			e.displayNames = dispName.(map[string]interface{})
 		case reflect.String:
-			e.displayNames = map[string]string{
+			e.displayNames = map[string]interface{}{
 				"en": dispName.(string),
 			}
 		}
 	} else {
-		e.displayNames = make(map[string]string, 0)
+		e.displayNames = make(map[string]interface{})
 	}
 
 	if desc, ok := input["description"]; ok {
 		switch reflect.TypeOf(desc).Kind() {
 		case reflect.Map:
-			e.descriptions = desc.(map[string]string)
+			e.descriptions = desc.(map[string]interface{})
 		case reflect.String:
-			e.descriptions = map[string]string{
+			e.descriptions = map[string]interface{}{
 				"en": desc.(string),
 			}
 		}
 	} else {
-		e.descriptions = make(map[string]string, 0)
+		e.descriptions = make(map[string]interface{})
 	}
 
 	if cmnt, ok := input["comment"]; ok {
