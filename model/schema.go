@@ -38,6 +38,8 @@ const (
 	MapSchemaClass
 	// StringSchemaClass class applied to string schema types.
 	StringSchemaClass
+	// VectorSchemaClass class applied to string schema types.
+	VectorSchemaClass
 	// UnsupportedSchemaClass type applied to unsupported schema types.
 	UnsupportedSchemaClass
 )
@@ -68,6 +70,8 @@ func parseSchema(input interface{}, tracker entityTracker) SchemaType {
 			return LongSchema
 		case "string":
 			return StringSchema
+		case "vector":
+			return VectorSchema
 		default:
 			return &SchemaReference{
 				id:      input.(string),

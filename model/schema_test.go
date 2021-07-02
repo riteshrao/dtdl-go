@@ -18,6 +18,7 @@ func TestParseSchema_Standard(t *testing.T) {
 	a.Same(IntegerSchema, parseSchema("integer", m), "Expected integer schema reference")
 	a.Same(LongSchema, parseSchema("long", m), "Expected long schema reference")
 	a.Same(StringSchema, parseSchema("string", m), "Expected string schema reference")
+	a.Same(VectorSchema, parseSchema("vector", m), "Expected vector schema reference")
 }
 
 func TestParseSchema_Custom(t *testing.T) {

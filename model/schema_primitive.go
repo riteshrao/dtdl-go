@@ -81,6 +81,16 @@ var (
 		},
 		class: StringSchemaClass,
 	}
+	// VectorSchema definition
+	VectorSchema = &Schema{
+		Entity: Entity{
+			id:           "vector",
+			displayNames: map[string]interface{}{"en": "Vector"},
+			descriptions: map[string]interface{}{"en": "Vector"},
+			types:        []string{"Vector"},
+		},
+		class: StringSchemaClass,
+	}
 	// UnsupportedSchema definition
 	UnsupportedSchema = &Schema{
 		Entity: Entity{
