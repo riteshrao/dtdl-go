@@ -89,7 +89,7 @@ var (
 			descriptions: map[string]interface{}{"en": "Vector"},
 			types:        []string{"Vector"},
 		},
-		class: StringSchemaClass,
+		class: VectorSchemaClass,
 	}
 	// UnsupportedSchema definition
 	UnsupportedSchema = &Schema{
