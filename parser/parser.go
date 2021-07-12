@@ -166,11 +166,11 @@ func (p *ModelParser) parseInterface(i map[string]interface{}) error {
 		return fmt.Errorf("Expected @id not found in input")
 	}
 
-	if !assertContext(i["@context"]) {
+	if !assertValue(i["@context"], "dtmi:dtdl:context;2") {
 		return fmt.Errorf("Unrecognized @context")
 	}
 
-	if i["@type"] != "Interface" {
+	if !assertValue(i["@type"], "Interface") {
 		return fmt.Errorf("Unrecognized @type. Expected Interface")
 	}
 
@@ -178,13 +178,13 @@ func (p *ModelParser) parseInterface(i map[string]interface{}) error {
 	return nil
 }
 
-func assertContext(ctx interface{}) bool {
+func assertValue(ctx interface{}, val string) bool {
 	switch reflect.TypeOf(ctx).Kind() {
 	case reflect.String:
-		return ctx.(string) == "dtmi:dtdl:context;2"
+		return ctx.(string) == val
 	case reflect.Slice:
 		for _, i := range ctx.([]interface{}) {
-			if i == "dtmi:dtdl:context;2" {
+			if i == val {
 				return true
 			}
 		}

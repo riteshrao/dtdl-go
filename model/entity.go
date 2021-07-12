@@ -11,7 +11,6 @@ type Entity struct {
 	types        []string
 }
 
-
 // ID returns the @id of the entity.
 func (e *Entity) ID() string {
 	return e.id
@@ -96,7 +95,11 @@ func parseEntity(input map[string]interface{}) Entity {
 	if types, ok := input["@type"]; ok {
 		switch reflect.TypeOf(types).Kind() {
 		case reflect.Slice:
-			e.types = types.([]string)
+			t := []string{}
+			for _, i := range types.([]interface{}) {
+				t = append(t, i.(string))
+			}
+			e.types = t
 		case reflect.String:
 			e.types = []string{types.(string)}
 		}
